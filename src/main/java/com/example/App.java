@@ -17,6 +17,9 @@ public class App
         System.out.print("\033[H\033[2J");   
         System.out.flush();
 
+        // Crée une solution
+        char[] solution = new char[] { 'M', 'M', 'C', 'R' };
+
         // Crée un gestionnaire permettant de sureveiller ce que l'utilisateur entre dans la console
         Scanner scanner = new Scanner(System.in);
         // Attend une saisie utilisateur
@@ -27,6 +30,19 @@ public class App
         Matcher matcher = pattern.matcher(userInput);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Invalid user input");
+        }
+
+        // Convertit la saisie utilisateur en tableau de caractères
+        char[] proposition = userInput.toCharArray();
+        // Initialise le nombre de couleurs bien placées
+        int correctCount = 0;
+        // Pour chaque couple de caractères de la proposition de l'utilisateur, et de la solution
+        for (int i = 0; i < 4; i ++) {
+            // Si les deux caractères sont identiques
+            if (solution[i] == proposition[i]) {
+                // Incrémente le nombre de couleurs bien placées
+                correctCount ++;
+            }
         }
 
         System.out.print("Hello, world!");
