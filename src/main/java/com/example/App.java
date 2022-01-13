@@ -45,6 +45,35 @@ public class App
             }
         }
 
+        // Initialise le nombre de couleurs absentes
+        int absentCount = 0;
+        // Pour chaque couleur parmi toutes les couleurs possibles
+        for (char colorCharacter : new char[] { 'R', 'V', 'B', 'C', 'J', 'M' }) {
+            // Compte la quantité de cette couleur présente dans la proposition de l'utilisateur
+            int propositionColorCount = 0;
+            for (char character : proposition) {
+                if (character == colorCharacter) {
+                    propositionColorCount ++;
+                }
+            }
+
+            // Compte la quantité de cette couleur présente dans la solution de l'utilisateur
+            int solutionColorCount = 0;
+            for (char character : solution) {
+                if (character == colorCharacter) {
+                    solutionColorCount ++;
+                }
+            }
+
+            // Ajoute à la quantité de couleurs absentes, la différence entre la quantité de cette couleur
+            // dans la proposition de l'utilisateur et dans la solution
+            // Uniquement dans le cas où il s'agit de couleurs dans la proposition qui manquent dans la solution
+            // (et pas de couleurs dans la solution qui manquent dans la proposition)
+            if (propositionColorCount > solutionColorCount) {
+                absentCount += propositionColorCount - solutionColorCount;
+            }
+        }
+
         System.out.print("Hello, world!");
     }
 }
