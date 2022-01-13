@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * Point d'entrée de l'application
  */
 public class App
-{   
+{
     /**
      * Processus principal de l'application
      */
@@ -74,6 +74,21 @@ public class App
             }
         }
 
-        System.out.print("Hello, world!");
+        // Détermine la nombre de couleurs mal placées par déduction,
+        // car si une couleur n'est ni bien placée, ni absente, elle est forcément mal placée
+        int misplacedCount = 4 - correctCount - absentCount;
+
+        // Affiche le résultat de la comparaison pour l'utilisateur
+        for (int i = 0; i < correctCount; i ++) {
+            System.out.print("O ");
+        }
+        for (int i = 0; i < misplacedCount; i ++) {
+            System.out.print("X ");
+        }
+        for (int i = 0; i < absentCount; i ++) {
+            System.out.print("- ");
+        }
+
+        System.out.println("");
     }
 }
