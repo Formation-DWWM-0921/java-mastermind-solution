@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.example.game.Color;
+
 /**
  * Point d'entrée de l'application
  */
@@ -18,8 +20,8 @@ public class App
         System.out.flush();
         
         // Crée une solution
-        char[] solution = new char[] { 'M', 'M', 'C', 'R' };
-        
+        Color[] solution = new Color[] { Color.Magenta, Color.Magenta, Color.Cyan, Color.Red };
+
         // Crée un gestionnaire permettant de sureveiller ce que l'utilisateur entre dans la console
         Scanner scanner = new Scanner(System.in);
 
@@ -36,8 +38,48 @@ public class App
                 throw new IllegalArgumentException("Invalid user input");
             }
 
-            // Convertit la saisie utilisateur en tableau de caractères
-            char[] proposition = userInput.toCharArray();
+            // Convertit la saisie utilisateur en tableau de couleurs
+            // Crée un tableau vide de 4 couleurs
+            Color[] proposition = new Color[4];
+            // Pour chaque caractère de la saisie utilisateur
+            for (int i = 0; i < 4; i ++) {
+                // En fonction du caractère lu
+                switch (userInput.charAt(i)) {
+                    // R pour Rouge
+                    case 'R':
+                        proposition[i] = Color.Red;
+                        break;
+                
+                    // B pour Bleu
+                    case 'B':
+                        proposition[i] = Color.Blue;
+                        break;
+                
+                    // V pour Vert
+                    case 'V':
+                        proposition[i] = Color.Green;
+                        break;
+                
+                    // C pour Cyan
+                    case 'C':
+                        proposition[i] = Color.Cyan;
+                        break;
+                
+                    // J pour Jaune
+                    case 'J':
+                        proposition[i] = Color.Yellow;
+                        break;
+                
+                    // R pour Rouge
+                    case 'M':
+                        proposition[i] = Color.Magenta;
+                        break;
+                
+                    default:
+                        throw new RuntimeException("This color does not exist.");
+                }
+            }
+
             // Initialise le nombre de couleurs bien placées
             int correctCount = 0;
             // Pour chaque couple de caractères de la proposition de l'utilisateur, et de la solution
@@ -52,19 +94,19 @@ public class App
             // Initialise le nombre de couleurs absentes
             int absentCount = 0;
             // Pour chaque couleur parmi toutes les couleurs possibles
-            for (char colorCharacter : new char[] { 'R', 'V', 'B', 'C', 'J', 'M' }) {
+            for (Color color : Color.values()) {
                 // Compte la quantité de cette couleur présente dans la proposition de l'utilisateur
                 int propositionColorCount = 0;
-                for (char character : proposition) {
-                    if (character == colorCharacter) {
+                for (Color propositionColor : proposition) {
+                    if (propositionColor == color) {
                         propositionColorCount ++;
                     }
                 }
 
                 // Compte la quantité de cette couleur présente dans la solution de l'utilisateur
                 int solutionColorCount = 0;
-                for (char character : solution) {
-                    if (character == colorCharacter) {
+                for (Color solutionColor : solution) {
+                    if (solutionColor == color) {
                         solutionColorCount ++;
                     }
                 }
