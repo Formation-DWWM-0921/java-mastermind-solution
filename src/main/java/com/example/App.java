@@ -15,6 +15,9 @@ public class App
      * Processus principal de l'application
      */
     public static void main(String[] args) throws Exception {
+        Color[] allColors = Color.values();
+
+
         // Efface la console
         System.out.print("\033[H\033[2J");   
         System.out.flush();
@@ -43,41 +46,8 @@ public class App
             Color[] proposition = new Color[4];
             // Pour chaque caractère de la saisie utilisateur
             for (int i = 0; i < 4; i ++) {
-                // En fonction du caractère lu
-                switch (userInput.charAt(i)) {
-                    // R pour Rouge
-                    case 'R':
-                        proposition[i] = Color.Red;
-                        break;
-                
-                    // B pour Bleu
-                    case 'B':
-                        proposition[i] = Color.Blue;
-                        break;
-                
-                    // V pour Vert
-                    case 'V':
-                        proposition[i] = Color.Green;
-                        break;
-                
-                    // C pour Cyan
-                    case 'C':
-                        proposition[i] = Color.Cyan;
-                        break;
-                
-                    // J pour Jaune
-                    case 'J':
-                        proposition[i] = Color.Yellow;
-                        break;
-                
-                    // R pour Rouge
-                    case 'M':
-                        proposition[i] = Color.Magenta;
-                        break;
-                
-                    default:
-                        throw new RuntimeException("This color does not exist.");
-                }
+                // Convertir le caractère en couleur et l'insère dans la combinaison
+                proposition[i] = Color.findByCharacter(userInput.charAt(i));
             }
 
             // Initialise le nombre de couleurs bien placées
