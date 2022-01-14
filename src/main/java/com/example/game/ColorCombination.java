@@ -108,4 +108,9 @@ public class ColorCombination
 
         return new ComparisonResult(correctCount, misplacedCount, absentCount);
     }
+
+    public Color[] getColors()
+    {
+        return colors;
+    }
 }
